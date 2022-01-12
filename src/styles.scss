@@ -37,7 +37,7 @@ $bookshelf_v1_bruno-theme: mat.define-light-theme((
 @import '@angular/material/theming';
 @include mat-core();
 
-$custom-app-primary: mat-palette($mat-blue);
+$custom-app-primary: mat-palette($mat-grey, 800);
 $custom-app-secondary: mat-palette($mat-indigo, A200, A400, 700);
 $custom-app-warn: mat-palette($mat-red);
 
