@@ -1,3 +1,6 @@
+import { first, tap } from 'rxjs';
+import { Dashboard } from './../modelosInterface/dashboard';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +8,15 @@ import { Injectable } from '@angular/core';
 })
 export class DashboardService {
 
-  constructor() { }
+  private readonly uriAPI = '../../assets/dashboard.json';
+
+  constructor(private cardsDashboard: HttpClient) { }
+
+  listagemCards() {
+    return this.cardsDashboard.get<Dashboard[]>(this.uriAPI)
+      .pipe(
+        first(),
+        tap(apiDashboard => console.log(apiDashboard))
+    )
+  }
 }
