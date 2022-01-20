@@ -13,7 +13,7 @@ import { DashboardService } from './../servicosinterface/dashboard.service';
 })
 export class FeedComponent {
   cards$: Observable<Dashboard[]>;
-  /** Based on the screen size, switch from standard to one column per row */
+  usuario={userName: 'Victor Icoma', icone:'remember_me'};
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {

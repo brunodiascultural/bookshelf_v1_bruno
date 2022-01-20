@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "bookshelf-v1-df42c"
+  },
+  "targets": {
+    "bookshelf-v1-df42c": {
+      "hosting": {
+        "bookshelf_v1_bruno": [
+          "soulbookshelfv1"
+        ]
+      }
+    }
   }
 }
