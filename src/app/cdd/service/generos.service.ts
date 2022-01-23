@@ -17,10 +17,9 @@ export class GenerosService {
   listagemGeneros() {
     return this.clienteDados.get<Generos[]>(this.urlAPI)
       .pipe(
-        delay(500),
         first(),
+        delay(500),
         tap(apiGeneros => console.log(apiGeneros))
-    )
-
+      )
   }
 }

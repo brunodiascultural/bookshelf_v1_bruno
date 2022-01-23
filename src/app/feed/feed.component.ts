@@ -4,6 +4,7 @@ import { catchError, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Dashboard } from './../modelosInterface/dashboard';
+import { AutenticacaoFirebaseService } from './../servicosinterface/autenticacao-firebase.service';
 import { DashboardService } from './../servicosinterface/dashboard.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { DashboardService } from './../servicosinterface/dashboard.service';
 })
 export class FeedComponent {
   cards$: Observable<Dashboard[]>;
-  usuario={userName: 'Victor Icoma', icone:'remember_me'};
+  usuario$ =  this.autenticacaoFirebaseService.usuarioLogado$;
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
@@ -26,7 +27,8 @@ export class FeedComponent {
 
 constructor(
   private breakpointObserver: BreakpointObserver,
-  private dashboardService: DashboardService
+  private dashboardService: DashboardService,
+  private autenticacaoFirebaseService: AutenticacaoFirebaseService,
   ) {
   this.cards$ = dashboardService.listagemCards()
     .pipe(

@@ -1,7 +1,8 @@
-import { first, tap } from 'rxjs';
-import { MenuNavegador } from './../modelosInterface/menuNavegador';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { first, tap } from 'rxjs';
+
+import { MenuNavegador } from './../modelosInterface/menuNavegador';
 
 @Injectable({
   providedIn: 'root'

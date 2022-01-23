@@ -1,9 +1,10 @@
-import { AppDialogosComponent } from './../../app-compartilhado/app-dialogos/app-dialogos.component';
-import { GenerosService } from './../service/generos.service';
-import { Generos } from './../modelos/generos';
 import { Component, OnInit } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { catchError, Observable, of } from 'rxjs';
+
+import { AppDialogosComponent } from './../../app-compartilhado/app-dialogos/app-dialogos.component';
+import { Generos } from './../modelos/generos';
+import { GenerosService } from './../service/generos.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ClassesComponent implements OnInit {
     this.livrosGeneros$ = generosService.listagemGeneros()
       .pipe(
         catchError(error => {
-          this.abrirDialogoErro('Erro ao carregar a tabela: #BS -'+error.status)
+          this.abrirDialogoErro("Erro ao carregar a tabela: #BS -" + error.status)
           return of([])
         })
       );
@@ -31,7 +32,7 @@ export class ClassesComponent implements OnInit {
 
   abrirDialogoErro(erroMsg: string) {
     this.dialogo.open(AppDialogosComponent, {
-      data:erroMsg
+      data: erroMsg
     })
   }
 

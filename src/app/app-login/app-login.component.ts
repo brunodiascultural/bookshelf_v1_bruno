@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 
 import { AutenticacaoFirebaseService } from './../servicosinterface/autenticacao-firebase.service';
 
@@ -11,13 +13,17 @@ import { AutenticacaoFirebaseService } from './../servicosinterface/autenticacao
 })
 export class AppLoginComponent {
   formularioLogin = this.loginBuilder.group({
-    email: new FormControl('',[Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     senha: new FormControl('', Validators.required)
   });
+
+  hasUnitNumber = false
 
   constructor(
     private loginBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public conteudo: string,
+    private toast: HotToastService,
+    private rotas: Router,
     private autenticacaoFirebaseService: AutenticacaoFirebaseService
   ) { }
 
@@ -28,7 +34,21 @@ export class AppLoginComponent {
   get senha() {
     return this.formularioLogin.get('senha')
   }
+  loginFireBase() {
+    if (!this.formularioLogin.valid) {
+      return
+    }
+    const { email, senha } = this.formularioLogin.value;
+    this.autenticacaoFirebaseService.loginUsuario(email, senha)
+      .pipe(
+        this.toast.observe({
+          success: 'Login válido, obrigado!',
+          loading: 'Redirecionando...',
+          error: 'Algo deu errado, confira as informações.'
+        })
+      ).subscribe(() => {
+        this.rotas.navigate(['/cdd'])
+      })
 
-  onSubmit() {
   }
 }
